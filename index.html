@@ -107,7 +107,7 @@
 
     .center-message {
       position: absolute;
-      top: 55%;
+      top: 54%;
       left: 50%;
       transform: translate(-50%, -50%);
       text-align: center;
@@ -130,7 +130,7 @@
       gap: 35px;
       margin-top: -20px;
       width: 300px; /* 버튼 영역의 전체 너비 지정 (조금 넓힘) */
-      margin-left: 70px;
+      margin-left: 90px;
       margin-right: 20px;
     }
 
@@ -139,7 +139,7 @@
       background: #111;
       color: white;
       padding: 14px 35px;
-      font-size: 26px; /* 원래 스타일로 변경 */
+      font-size: 24px; /* 원래 스타일로 변경 */
       font-weight: 500;
       border: 1px solid #444;
       border-radius: 10px;
@@ -183,7 +183,7 @@
       position: absolute;
       bottom: 30px;
       left: 40px;
-      font-size: 32px;
+      font-size: 30px;
       font-family: "Pretendard", sans-serif;
       font-weight: 200;
       line-height: 0.5;
@@ -292,6 +292,115 @@
         pointer-events: none;
         z-index: 199;
     }
+
+    /* ----- [새로 추가된 코드] 계정 정보 버튼 스타일 ----- */
+    .top-right-account {
+        position: absolute;
+        top: 50px;
+        right: 40px;
+        z-index: 2;
+        animation: fadeInRight 1s ease-out 0.8s both;
+    }
+
+    .top-right-account .button {
+        background: #111;
+        color: white;
+        padding: 12px 28px;
+        font-size: 24px;
+        font-weight: 500;
+        border: 1px solid #444;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(255,255,255,0.08);
+        cursor: pointer;
+        transition: all 0.4s ease;
+    }
+
+    .top-right-account .button:hover {
+        background: #f5f5f5;
+        color: #000;
+        box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+    }
+
+    /* ----- [새로 추가된 코드] 팝업 스타일 ----- */
+    .popup-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: none; /* JS로 제어 */
+        align-items: center;
+        justify-content: center;
+        z-index: 100;
+    }
+
+    .popup-overlay.show {
+        display: flex;
+    }
+
+    .popup-content {
+        background: #1a1a1a;
+        padding: 40px 50px;
+        border-radius: 20px;
+        border: 1px solid #555;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        color: #f0f0f0;
+        text-align: left;
+        position: relative;
+        width: 600px;
+        animation: popup-swoop-in 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    }
+
+    @keyframes popup-swoop-in {
+      from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .popup-content h2 {
+        font-family: 'Pretendard', sans-serif;
+        font-size: 42px;
+        font-weight: 700;
+        color: #fff;
+        margin-top: 0;
+        margin-bottom: 30px;
+    }
+
+    .popup-content p {
+        font-size: 24px;
+        line-height: 1.6;
+        margin: 15px 0;
+    }
+
+    .popup-content strong {
+        color: #fff;
+        font-weight: 600;
+        display: inline-block;
+        width: 150px; /* 레이블 너비 고정으로 정렬 */
+    }
+
+    .popup-close-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: transparent;
+        border: none;
+        color: #888;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: color 0.3s;
+        line-height: 1;
+    }
+    .popup-close-btn:hover {
+        color: #fff;
+    }
   </style>
 </head>
 <body>
@@ -302,14 +411,19 @@
   <div class="fixed-container">
     <div class="top-left" id="top-left-text">Welcome, New blanker!</div>
 
+    <!-- [새로 추가된 코드] 계정 정보 버튼 -->
+    <div class="top-right-account">
+        <button class="button" id="account-info-btn">계정 정보</button>
+    </div>
+
     <div class="center-message">
       <h1 id="welcome-text">입사자 님,<br>블랭크 합류를 환영해요!</h1>
       
       <div class="button-grid">
-        <button class="button" onclick="window.open('https://docs.google.com/forms/d/1ZmaT6brR4odOzDF2BTTPZjaDkm0kkBe4UYtkK1f7Mbs/viewform?edit_requested=true', '_blank')">1. 지문 등록 & 웰컴키트</button>
-        <button class="button" onclick="window.open('https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&ifkv=AdBytiN_oNoHm1SYvIUKOsdkh4lFmynoI7UoKoVGCHPQ9dWg68eL1qwd_nDK94lGE4lfdlzUrMj7&rip=1&sacu=1&service=mail&flowName=GlifWebSignIn&flowEntry=ServiceLogin&dsh=S-1541482670%3A1751441461197019');">2. Gmail / Slack 로그인</button>
-        <button class="button" onclick="alert('해당 항목은 블랭크 대외비입니다.😊');">3. 업무 세팅 체크리스트</button>
-        <button class="button" onclick="alert('해당 항목은 블랭크 대외비입니다.😊');">4. 블랭크 위키</button>
+        <button class="button" onclick="window.open('https://docs.google.com/forms/d/1ZmaT6brR4odOzDF2BTTPZjaDkm0kkBe4UYtkK1f7Mbs/viewform?edit_requested=true', '_blank')">1. 지문 등록하기</button>
+        <button class="button" onclick="window.open('https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&ifkv=AdBytiN_oNoHm1SYvIUKOsdkh4lFmynoI7UoKoVGCHPQ9dWg68eL1qwd_nDK94lGE4lfdlzUrMj7&rip=1&sacu=1&service=mail&flowName=GlifWebSignIn&flowEntry=ServiceLogin&dsh=S-1541482670%3A1751441461197019');">2. 구글/슬랙/노션 로그인</button>
+        <button class="button" onclick="alert('해당 항목은 블랭크 대외비입니다.😊');">3. 업무 세팅하기 (노션)</button>
+        <button class="button" onclick="alert('해당 항목은 블랭크 대외비입니다.😊');">4. 블랭크 위키 (노션)</button>
       </div>
 
     </div>
@@ -324,7 +438,20 @@
       <img src="https://github.com/jjsblank/welcome-page/blob/main/welcome-project/blank-logo-white.png?raw=true">
     </div>
 
-    <div id="easter-egg-message">블랭크에 오신 걸 진심으로 환영해요💖</div>
+    <div id="easter-egg-message">블랭크에 오신 걸 다시 한번 진심으로 환영해요💖</div>
+    
+    <!-- [새로 추가된 코드] 계정 정보 팝업 -->
+    <div class="popup-overlay" id="account-popup">
+        <div class="popup-content">
+            <button class="popup-close-btn" id="popup-close-btn">×</button>
+            <h2 id="popup-title">계정 정보</h2>
+            <p><strong>이메일</strong> 나인하이어 메시지를 통해 확인해 주세요.</p>
+            <p><strong>임시 비밀번호</strong> 이름01 (예 : 김블랭01 ➡️ rlaqmffod01)</p>
+            <p style="font-size: 18px; color: #aaa; margin-top: 30px;">
+                * 최초 로그인 후 비밀번호를 변경하실 수 있습니다.
+            </p>
+        </div>
+    </div>
   </div>
 
   <script>
@@ -337,7 +464,7 @@
       const pdfUrl = "https://jjsblank.github.io/welcome-page/welcome-project/blank-day1-checklist.pdf" ;
       window.open(pdfUrl, '_blank') ; 
     }
-    const lines = ["<strong>삼</strong> : 행시를 넣는 항목입니다.", "<strong>행</strong> : 복한 하루 보내세요💖", "<strong>시</strong> : 원한 곳에서!"];
+    const lines = ["<strong>테</strong> : 스트", "<strong>스</strong> : 트", "<strong>트</strong> : -"];
     const sloganEl = document.getElementById("slogan");
     lines.forEach(lineHTML => { const p = document.createElement("p"); const temp = document.createElement("span"); temp.innerHTML = lineHTML; temp.childNodes.forEach(node => { if (node.nodeType === Node.TEXT_NODE) { [...node.textContent].forEach(char => { const span = document.createElement("span"); span.classList.add("bounce-char"); span.textContent = char === ' ' ? '\u00A0' : char; span.addEventListener("mouseenter", () => { span.classList.add("bounce"); setTimeout(() => span.classList.remove("bounce"), 600); }); p.appendChild(span); }); } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName === "STRONG") { const span = document.createElement("span"); span.classList.add("bounce-char"); const strong = document.createElement("strong"); strong.textContent = node.textContent; span.appendChild(strong); span.addEventListener("mouseenter", () => { span.classList.add("bounce"); setTimeout(() => span.classList.remove("bounce"), 600); }); p.appendChild(span); } }); sloganEl.appendChild(p); });
     function applyBounceEffect(targetId) { const el = document.getElementById(targetId); const text = el.innerHTML.replace(/<br\s*\/?>/gi, '\n'); el.innerHTML = ''; for (const char of text) { if (char === '\n') { el.appendChild(document.createElement('br')); continue; } const span = document.createElement("span"); span.classList.add("bounce-char"); span.textContent = char === ' ' ? '\u00A0' : char; span.addEventListener("mouseenter", () => { span.classList.add("bounce"); setTimeout(() => span.classList.remove("bounce"), 600); }); el.appendChild(span); } }
@@ -419,22 +546,19 @@
             return lineRects;
         }
 
-        // ==========================================================
-        // ===== [수정된 부분] "보이지 않는 벽" 문제를 해결하기 위한 수정 =====
-        // ==========================================================
         function updateWallRects() {
             walls.length = 0;
 
-            // [수정] 정교한 줄별 충돌 감지가 필요한 모든 텍스트 요소를 이 배열에 넣습니다.
             const textElements = [
                 document.getElementById('top-left-text'),
-                document.getElementById('welcome-text'), // 단일 사각형 방식에서 줄별 감지 방식으로 변경
-                document.getElementById('slogan')        // 단일 사각형 방식에서 줄별 감지 방식으로 변경
+                document.getElementById('welcome-text'),
+                document.getElementById('slogan')
             ];
-
-            // [수정] 단일 사각형 충돌 감지로 충분한 요소들만 이 배열에 남깁니다.
+            
+            // [수정] 충돌 감지 객체에 계정 정보 버튼 추가
             const otherElements = [
                 ...document.querySelectorAll('.button-grid .button'),
+                ...document.querySelectorAll('.top-right-account .button'),
                 document.getElementById('easter-egg-logo')
             ];
             
@@ -505,34 +629,12 @@
             if (isPhysicsActive) {
                 emojiState.vx *= 0.98; emojiState.vy *= 0.98; emojiState.vy += 0.08;
                 emojiState.x += emojiState.vx; emojiState.y += emojiState.vy;
-                emojiState.rotation += emojiState.rotationSpeed; emojiState.rotationSpeed *= 0.98;
+                emojiState.rotation += emojiState.rotationSpeed; emojiState.rotationSpeed *= 0.97;
                 
-const dx = emojiState.x - mouse.x;
-const dy = emojiState.y - mouse.y;
-const distance = Math.sqrt(dx * dx + dy * dy);
-
-if (distance < emojiState.radius) {
-    // 1. 마우스가 얼마나 빠르게 움직이는지 계산
-    const mouseVX = mouse.x - mouse.px;
-    const mouseVY = mouse.y - mouse.py;
-
-    // 2. 이모지와 마우스의 각도 계산
-    const angle = Math.atan2(dy, dx);
-
-    // 3. 밀어내는 힘의 크기 (마우스 속도와 반비례 거리 기반)
-    // 마우스가 빠를수록, 그리고 이모지 중앙에 가까울수록 강하게 밀어냅니다.
-    const mouseSpeed = Math.sqrt(mouseVX*mouseVX + mouseVY*mouseVY);
-    const repulsion = Math.min(mouseSpeed * 0.8 + (emojiState.radius - distance) * 0.2, 15); // 힘의 최대치 설정
-
-    // 4. 기존 속도에 밀어내는 힘을 더해줌 (+=)
-    emojiState.vx += Math.cos(angle) * repulsion;
-    emojiState.vy += Math.sin(angle) * repulsion;
-    
-    // 5. 회전 효과도 추가
-    emojiState.rotationSpeed += (mouseVX - mouseVY) * 0.05;
-}
+                const dx = emojiState.x - mouse.x; const dy = emojiState.y - mouse.y; const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < emojiState.radius) { const mouseVX = (mouse.x - mouse.px); const mouseVY = (mouse.y - mouse.py); emojiState.vx = mouseVX * 1.5; emojiState.vy = mouseVY * 1.5; emojiState.rotationSpeed = (mouseVX - mouseVY) * 0.3; }
                 
-                const restitution = -0.9;
+                const restitution = -0.7;
                 if (emojiState.x - emojiState.radius < 0) { emojiState.x = emojiState.radius; emojiState.vx *= restitution; }
                 if (emojiState.x + emojiState.radius > containerWidth) { emojiState.x = containerWidth - emojiState.radius; emojiState.vx *= restitution; }
                 if (emojiState.y - emojiState.radius < 0) { emojiState.y = emojiState.radius; emojiState.vy *= restitution; }
@@ -576,6 +678,29 @@ if (distance < emojiState.radius) {
         function triggerFireworks() { const containerRect = container.getBoundingClientRect(); const scale = getContainerScale(); const goalX = containerRect.left + (containerWidth - 75) * scale; const goalY = containerRect.top + 75 * scale; for(let i=0; i<100; i++) { fireworkParticles.push(createFireworkParticle(goalX, goalY)); } if(fireworkParticles.length > 0) animateFireworks(); }
         function createFireworkParticle(x, y) { const angle = Math.random() * Math.PI * 2; const speed = Math.random() * 8 + 2; const colors = ['#ffcc00', '#ff6666', '#66ccff', '#99ff99', '#ffffff']; return { x: x, y: y, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed, color: colors[Math.floor(Math.random() * colors.length)], size: Math.random() * 3 + 2, alpha: 1, decay: Math.random() * 0.02 + 0.01 }; }
         function animateFireworks() { fireworksCtx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height); let stillAnimating = false; fireworkParticles.forEach((p) => { if(p.alpha > 0.01) { stillAnimating = true; p.x += p.vx; p.y += p.vy; p.vy += 0.1; p.alpha -= p.decay; fireworksCtx.globalAlpha = p.alpha; fireworksCtx.beginPath(); fireworksCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2, false); fireworksCtx.fillStyle = p.color; fireworksCtx.fill(); } }); fireworksCtx.globalAlpha = 1; if (stillAnimating) { requestAnimationFrame(animateFireworks); } else { fireworkParticles = []; } }
+    });
+
+    /* ----- [새로 추가된 코드] 계정 정보 팝업 스크립트 ----- */
+    const accountInfoBtn = document.getElementById('account-info-btn');
+    const accountPopup = document.getElementById('account-popup');
+    const popupCloseBtn = document.getElementById('popup-close-btn');
+
+    // 팝업 열기
+    accountInfoBtn.addEventListener('click', () => {
+        accountPopup.classList.add('show');
+    });
+
+    // 팝업 닫기 (닫기 버튼)
+    popupCloseBtn.addEventListener('click', () => {
+        accountPopup.classList.remove('show');
+    });
+
+    // 팝업 닫기 (오버레이 클릭)
+    accountPopup.addEventListener('click', (event) => {
+        // 클릭된 요소가 오버레이 자체일 때만 닫힘
+        if (event.target === accountPopup) {
+            accountPopup.classList.remove('show');
+        }
     });
   </script>
 </body>

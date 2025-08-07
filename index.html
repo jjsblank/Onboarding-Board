@@ -464,7 +464,7 @@
       const pdfUrl = "https://jjsblank.github.io/welcome-page/welcome-project/blank-day1-checklist.pdf" ;
       window.open(pdfUrl, '_blank') ; 
     }
-    const lines = ["<strong>테</strong> : 스트", "<strong>스</strong> : 트", "<strong>트</strong> : -"];
+    const lines = ["<strong>삼</strong> 행시를 넣는 항목입니다.", "<strong>행</strong> 복한 하루 보내세요✨", "<strong>시</strong> 원한 곳에서!🍉"];
     const sloganEl = document.getElementById("slogan");
     lines.forEach(lineHTML => { const p = document.createElement("p"); const temp = document.createElement("span"); temp.innerHTML = lineHTML; temp.childNodes.forEach(node => { if (node.nodeType === Node.TEXT_NODE) { [...node.textContent].forEach(char => { const span = document.createElement("span"); span.classList.add("bounce-char"); span.textContent = char === ' ' ? '\u00A0' : char; span.addEventListener("mouseenter", () => { span.classList.add("bounce"); setTimeout(() => span.classList.remove("bounce"), 600); }); p.appendChild(span); }); } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName === "STRONG") { const span = document.createElement("span"); span.classList.add("bounce-char"); const strong = document.createElement("strong"); strong.textContent = node.textContent; span.appendChild(strong); span.addEventListener("mouseenter", () => { span.classList.add("bounce"); setTimeout(() => span.classList.remove("bounce"), 600); }); p.appendChild(span); } }); sloganEl.appendChild(p); });
     function applyBounceEffect(targetId) { const el = document.getElementById(targetId); const text = el.innerHTML.replace(/<br\s*\/?>/gi, '\n'); el.innerHTML = ''; for (const char of text) { if (char === '\n') { el.appendChild(document.createElement('br')); continue; } const span = document.createElement("span"); span.classList.add("bounce-char"); span.textContent = char === ' ' ? '\u00A0' : char; span.addEventListener("mouseenter", () => { span.classList.add("bounce"); setTimeout(() => span.classList.remove("bounce"), 600); }); el.appendChild(span); } }
@@ -705,3 +705,4 @@
   </script>
 </body>
 </html>
+
